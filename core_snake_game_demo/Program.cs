@@ -11,11 +11,37 @@ namespace core_snake_game_demo
         public int Y { get; set; }
     }
 
+    public class Border : Sprite
+    {
+        public Border(char symbol) : base(symbol)
+        {
+        }
+    }
+
     public class Fruit : Sprite
     {
         public Fruit(char symbol) : base(symbol)
         {
         }
+    }
+
+    public class Head : Sprite
+    {
+        //Fields
+        private char _head;
+
+        //Constructors
+        public Head(char symbol) : base(symbol)
+        {
+
+        }
+
+        //Methods
+        public char DrawHead()
+        {
+            return _head;
+        }
+
     }
     public class Worm : Sprite
     {
@@ -86,11 +112,13 @@ namespace core_snake_game_demo
 
         static Fruit _fruit;
         static Worm _worm;
+        static Head _head;
 
         static Program()
         {
             _fruit = new Fruit('♥');
-            _worm = new Worm('ö');
+            _head = new Head('ö');
+            _worm = new Worm('֍');
 
             //Corner piece top left
             //Coner piece top right
@@ -235,14 +263,16 @@ namespace core_snake_game_demo
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(worm_x, worm_y);
-            Console.Write('ö');
+            //Console.Write('ö');
+            Console.Write(_head.Draw());
         }
 
         static void DrawWormBodyOnHeadPosition()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.SetCursorPosition(worm_x, worm_y);
-            Console.Write('o');
+            //Console.Write('o');
+            Console.Write(_worm.Draw());
         }
 
         static void MoveWormHead()
