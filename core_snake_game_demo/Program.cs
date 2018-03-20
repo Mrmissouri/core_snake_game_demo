@@ -6,12 +6,65 @@ namespace core_snake_game_demo
 {
     class Pos
     {
+        //Properties
         public int X { get; set; }
         public int Y { get; set; }
     }
 
+    public class Fruit : Sprite
+    {
+        public Fruit(char symbol) : base(symbol)
+        {
+        }
+    }
+    public class Worm : Sprite
+    {
+
+        //Fields
+        private char _body;
+
+        //Properties 
+
+        //Constructors
+        public Worm(char symbol) : base(symbol)
+        {
+
+        }
+
+        //Methods
+        public char DrawBody()
+        {
+            return _body;
+
+        }
+    }
+    public abstract class Sprite
+    {
+
+        /* Base Class */
+
+        //Fields
+        private char _symbol;
+
+        //Properties
+
+        //Constructors
+        public Sprite(char symbol)
+        {
+            _symbol = symbol;
+        }
+
+        //Methods
+        public char Draw()
+        {
+            return _symbol;
+        }
+    }
+
     class Program
     {
+
+        // Fields
         static char[][] grid = new char[20][];
         static int width = 50;
         static int height = 20;
@@ -28,8 +81,26 @@ namespace core_snake_game_demo
         static int target_y;
         static int score = 0;
 
+
         static List<Pos> worm = new List<Pos>();
 
+        static Fruit _fruit;
+        static Worm _worm;
+
+        static Program()
+        {
+            _fruit = new Fruit('♥');
+            _worm = new Worm('ö');
+
+            //Corner piece top left
+            //Coner piece top right
+            //Corner piece bottom left
+            //Corner piecer bottom right
+            //Vertical piece
+            //Horizontal piece
+        }
+
+        //Methods(Main)
         static void Main(string[] args)
         {
 
@@ -84,7 +155,10 @@ namespace core_snake_game_demo
             Console.CursorVisible = false;
 
             for (int i = 0; i < height; i++)
+            {
+                //Initializes each row in the array with an array of characters
                 grid[i] = new char[width];
+            }
 
             grid[0][0] = '╔';
             grid[0][width - 1] = '╗';
@@ -105,8 +179,12 @@ namespace core_snake_game_demo
             }
 
             for (int y = 1; y < height - 1; y++)
+            {
                 for (int x = 1; x < width - 1; x++)
+                {
                     grid[y][x] = ' ';
+                }
+            }
 
         }
 
@@ -224,7 +302,8 @@ namespace core_snake_game_demo
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(x, y);
-            Console.Write('☼');
+            //Console.Write('☼');
+            Console.Write(_fruit.Draw());
         }
 
         static void InitScore()
